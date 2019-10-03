@@ -1,0 +1,35 @@
+--- a/builds/unix/configure
++++ b/builds/unix/configure
+@@ -2574,6 +2574,19 @@
+ # Remember, the first character of IFS is used to create $*,
+ # except with old shells:
+ build_os=$*
++
++if test -n "$build_vendor"; then
++  if [[ $build_vendor == "pc" ]]; then
++#	echo "Removing pc from native compiler prefix!"
++#	ac_cv_build="$build_cpu-$build_os"
++	if test -n "$build_alias"; then
++		echo "pc detecred in prefix:: Overriding..."
++        echo "Using --build parameter as native compiler prefix!"
++		ac_cv_build="$build_alias"
++    fi
++  fi
++fi
++
+ IFS=$ac_save_IFS
+ case $build_os in *\ *) build_os=`echo "$build_os" | sed 's/ /-/g'`;; esac
+ 
+@@ -12161,6 +12174,12 @@
+ $as_echo "no" >&6; }
+ fi
+ 
++echo "Setting proper assembler path, because otherwise it gets confused and uses the cross-compiler toolchain's"
++if test -n "${CC_BUILD}"; then
++  CC_BUILD_PATH=`which ${CC_BUILD}`
++  CC_BUILD_DIR=${CC_BUILD_PATH%/*}
++  CC_BUILD="${CC_BUILD} -B$CC_BUILD_DIR"
++fi
+ 
+   test -z "${CC_BUILD}" && as_fn_error $? "cannot find native C compiler" "$LINENO" 5
+ 

@@ -1,0 +1,21 @@
+version: "3"
+
+# docker build -t "scummvm/scummvm-android:latest" -f "./Dockerfile" .
+
+services:
+  android:
+    image: scummvm/scummvm-android:latest
+    environment:
+      CCACHE_DIR: /data/ccache/android
+    volumes:
+      # The Android home directory is where Android stores the default signing
+      # keys for the build
+      - android-home:/home/scummvm/.android
+      - ccache:/data/ccache
+      - repository:/data/sharedrepo
+
+volumes:
+  android-home:
+  ccache:
+  repository:
+

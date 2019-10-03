@@ -1,0 +1,13 @@
+--- a/src/libFLAC/include/private/macros.h
++++ b/src/libFLAC/include/private/macros.h
+@@ -51,8 +51,8 @@
+ /* Whatever other unix that has sys/param.h */
+ #elif defined(HAVE_SYS_PARAM_H)
+ #include <sys/param.h>
+-#define flac_max(a,b) MAX(a,b)
+-#define flac_min(a,b) MIN(a,b)
++#define flac_max(a,b) (((a)>(b))?(a):(b))
++#define flac_min(a,b) (((a)<(b))?(a):(b))
+ 
+ /* Windows VS has them in stdlib.h.. XXX:Untested */
+ #elif defined(_MSC_VER)
