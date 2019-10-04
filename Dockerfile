@@ -41,7 +41,7 @@ RUN mkdir -p ${ANDROID_USR_OPT_PATH}/ && \
 # NDK r14b (and NDK versions older than NDK 19) needs to explicitly create standalone toolchains
 # and we need that because we're cross compiliing a set of third party libraries for our toolchains
 RUN cd android-ndk-*/ && \
-    # standalone toolchain for "arm" (armeabi)
+    # standalone toolchain for "arm" (armeabi armeabi-v7a)
 	python ./build/tools/make_standalone_toolchain.py \
     --arch arm \
     --api ${PLATFORM_MIN_API_VERSION} \
@@ -461,13 +461,15 @@ RUN mkdir -p /home/scummvm/.android && \
 	chown scummvm:scummvm /home/scummvm/.android
 
 # Copy aux scripts 
-# TODO create an automated script instead (?) 
+# TODO create an automated script instead (?)
+# TODO create an automated script for building a multi-eabi apk (?)
 #
-COPY ./setenv-android.sh                  ${ANDROID_USR_OPT_PATH}/
-COPY ./setenv-android-build-arm.sh        ${ANDROID_USR_OPT_PATH}/
-COPY ./setenv-android-build-arm64-v8a.sh  ${ANDROID_USR_OPT_PATH}/
-COPY ./setenv-android-build-x86.sh        ${ANDROID_USR_OPT_PATH}/
-COPY ./setenv-android-build-x86_64.sh     ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android.sh                   ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android-build-armeabi.sh     ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android-build-armeabi-v7a.sh ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android-build-arm64-v8a.sh   ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android-build-x86.sh         ${ANDROID_USR_OPT_PATH}/
+COPY ./setenv-android-build-x86_64.sh      ${ANDROID_USR_OPT_PATH}/
 
 # ScummVM configure-specific
 ENV ANDROID_NDK=${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build \

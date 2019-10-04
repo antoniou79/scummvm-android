@@ -14,8 +14,8 @@ export AS=$ANDROID_STANDALONE_TRIBLE-as
 #export CPPFLAGS=
 export CXX="ccache $ANDROID_STANDALONE_TRIBLE-clang++"
 export CXXFILT=$ANDROID_STANDALONE_TRIBLE-c++filt
-export CXXFLAGS="-target armv5te-none-linux-androideabi -isystem $ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/include -D__ANDROID_API__=9"
-export LDFLAGS="-target armv5te-none-linux-androideabi -L$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/lib"
+export CXXFLAGS="-isystem $ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/include"
+export LDFLAGS="-L$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/lib"
 export CC=$ANDROID_STANDALONE_TRIBLE-clang
 export CPP=$ANDROID_STANDALONE_TRIBLE-cpp
 export DWP=$ANDROID_STANDALONE_TRIBLE-dwp
@@ -41,8 +41,7 @@ export PKG_CONFIG_LIBDIR=$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/l
 export ANDROID_NDK=$ANDROID_NDK_HOME/build
 export ANDROID_SDK=$ANDROID_SDK_ROOT
 
-echo "To build for Android ARMv5TE (armeabi)"
+echo "To build for Android ARMv7-A (armeabi-v7a)..."
 echo "From ScummVM source folder run:"
-echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm --enable-debug --disable-mt32emu"
+echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm-v7a --enable-debug --disable-mt32emu"
 echo "make -j$(nproc)"
-

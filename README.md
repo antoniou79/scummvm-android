@@ -1,5 +1,5 @@
 # scummvm-android
-Docker Image configuration and auxiliary files for NDK r14b toolchains for building the ScummVM port for Android
+Docker Image configuration and auxiliary files for NDK r14b toolchains for building the Android port for ScummVM
 
 Based on the work of Colin Snover (csnover), Cameron Cawley (ccawley2011) and Le Philousophe (lephilousophe).
 
@@ -20,7 +20,7 @@ Cross-compiled libraries are:
 
 Todo: 
 - Properly fill in documentation here for users
-- Add separate building script for arm-v7a apks
+- Add separate building toolchain (?) and script for arm-v7a apks
 - Test adding support for more third party libraries 
 - Test possible transition to building with gradle without losing minimum API support
 
