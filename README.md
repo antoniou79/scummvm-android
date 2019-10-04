@@ -18,10 +18,37 @@ Cross-compiled libraries are:
 - fluidsynth-lite-38353444676a1788ef78eb7f835fba4fa061f3f2 -- (Apr 6, 2019)
 - a52dec-0.7.4
 
+Basic instructions:
+- Install docker (community edition shold work fine) and docker-compose on your system (tested with Linux Ubuntu x64 16.04.6 LTS)
+
+- Build the image with:
+```
+docker build -t "scummvm/scummvm-android:latest" -f "./Dockerfile" .
+```
+
+- Edit "docker-compose.override.yml" and replace the placeholder paths with your native system's paths, properly.
+
+- Run the container with:
+```
+docker-compose run --rm android
+```
+
+- From within the container, navigate to /data/sharedrepo, where the scummvm repo should be mounted. Then run the setenv-android.sh script. This script has to be run only once per container session.
+```
+cd /data/sharedrepo
+source $ANDROID_USR_OPT_PATH/setenv-android.sh
+```
+- Then run the following sequence of commands depending on the architecture you are targetting. Example:
+```
+source $ANDROID_USR_OPT_PATH/setenv-android-build-arm64-v8a.sh
+make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm64-v8a  --disable-mt32emu --enable-debug
+make -j$(nproc)
+```
+
+- The output APK will be created as scummvm-Debug.apk in the current folder. Make sure to move or copy it elsewhere before running make clean and starting to build for another architecture.
+
 Todo: 
-- Properly fill in documentation here for users
-- Add separate building toolchain (?) and script for arm-v7a apks
-- Test adding support for more third party libraries 
+- Test adding support for more third party libraries
 - Test possible transition to building with gradle without losing minimum API support
 
 Reference links:
