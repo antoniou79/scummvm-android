@@ -45,7 +45,7 @@ make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-v
 make -j$(nproc)
 ```
 
-- The output APK will be created as scummvm-Debug.apk in the current folder. Make sure to move or copy it elsewhere before running make clean and starting to build for another architecture.
+- The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy it elsewhere before running make clean and starting to build for another architecture.
 
 Todo: 
 - Test adding support for more third party libraries
