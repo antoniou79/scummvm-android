@@ -43,6 +43,5 @@ export ANDROID_SDK=$ANDROID_SDK_ROOT
 
 echo "To build for Android ARMv5TE (armeabi)"
 echo "From ScummVM source folder run:"
-echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm --enable-debug --disable-mt32emu"
+echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm --disable-mt32emu --enable-debug"
 echo "make -j$(nproc)"
-

@@ -43,5 +43,5 @@ export ANDROID_SDK=$ANDROID_SDK_ROOT
 
 echo "To build for Android ARMv8-A (arm64-v8a)..."
 echo "From ScummVM source folder run:"
-echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm64-v8a --enable-debug --disable-mt32emu"
+echo "make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm64-v8a --disable-mt32emu --enable-debug"
 echo "make -j$(nproc)"

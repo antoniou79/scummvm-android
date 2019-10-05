@@ -109,16 +109,6 @@ RUN cd android-ndk-*/ && \
     ln -s ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86_64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot \
           ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_x64_VERSION}/arch-x86_64 && \
     #
-    # Move of platform android-23/arch-* as is from original NDK folder
-    # platform android-23 is needed separately because the code is compiled for API 14, but
-    # the packaging is done for API 23, apparently for some vague manifest-related
-    # reason in commit a32c53f936f8b3fbf90d016d3c07de62c96798b1
-    mkdir -p ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-23/ && \
-    mv platforms/android-23/arch-arm    ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-23/arch-arm    && \
-    mv platforms/android-23/arch-arm64  ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-23/arch-arm64  && \
-    mv platforms/android-23/arch-x86    ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-23/arch-x86    && \
-    mv platforms/android-23/arch-x86_64 ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-23/arch-x86_64 && \
-    #
     # Move of folders "build" and "sources" as is from original NDK folder
     mv build   ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build   && \
     mv sources ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/sources && \
@@ -133,6 +123,7 @@ RUN cd android-ndk-*/ && \
 # uses the obsolete ndk-build process instead of the newer CMake+Gradle process.
 ARG SDK_VERSION=r25.2.5
 WORKDIR /tmp/compile
+RUN mkdir -p /root/.android && touch /root/.android/repositories.cfg
 RUN wget --progress=bar:force:noscroll -O sdk.zip \
          https://dl.google.com/android/repository/tools_${SDK_VERSION}-linux.zip && \
     unzip sdk.zip -d ${ANDROID_USR_OPT_PATH}/android-sdk-linux_x86 && \
@@ -149,13 +140,10 @@ RUN wget --progress=bar:force:noscroll -O sdk.zip \
    && \
    find ${ANDROID_USR_OPT_PATH}/android-sdk-linux_x86 -type f -executable -exec chmod o+x {} + && \
 #
-# android-23 is needed because the code is compiled for API 14, but the
-# packaging is done for API 23, apparently for some vague manifest-related
-# reason in commit a32c53f936f8b3fbf90d016d3c07de62c96798b1
 #
 # Run sdkmanager and install "build-tools;25.0.3"
 #                        and "platform-tools"  (this is 29.0.4)
-#                        and "platforms;android-23" (version 3)
+#                        and "platforms;android-26" (version 2)
 #
 # The sdkmanager --list will read something like:
 # Installed packages:
@@ -163,13 +151,13 @@ RUN wget --progress=bar:force:noscroll -O sdk.zip \
 #  -------              | ------- | -------                        | -------              
 #  build-tools;25.0.3   | 25.0.3  | Android SDK Build-Tools 25.0.3 | build-tools/25.0.3/  
 #  platform-tools       | 29.0.4  | Android SDK Platform-Tools     | platform-tools/      
-#  platforms;android-23 | 3       | Android SDK Platform 23        | platforms/android-23/
+#  platforms;android-26 | 2       | Android SDK Platform 26        | platforms/android-26/
 #  tools                | 25.2.5  | Android SDK Tools 25.2.5       | tools/    
 #
    yes | ${ANDROID_USR_OPT_PATH}/android-sdk-linux_x86/tools/bin/sdkmanager \
             "build-tools;25.0.3" \
             platform-tools \
-            "platforms;android-23"
+            "platforms;android-26"
 #
 # CROSS COMPILING THIRD PARTY LIBRARIES
 # 
