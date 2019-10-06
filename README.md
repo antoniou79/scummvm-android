@@ -20,7 +20,8 @@ Cross-compiled libraries are:
 - a52dec-0.7.4
 
 Basic instructions:
-- Install docker (community edition shold work fine) and docker-compose on your system (tested with Linux Ubuntu x64 16.04.6 LTS)
+- Install docker (community edition shold work fine) (tested with version 19.03.2, build 6a30dfc on Linux Ubuntu x64 16.04.6 LTS)
+- Install docker-compose on your system (tested with version 1.24.1, build 4667896b)
 
 - Build the image with:
 ```
