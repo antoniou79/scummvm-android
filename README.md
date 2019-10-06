@@ -4,6 +4,7 @@ Docker Image configuration and auxiliary files for NDK r14b toolchains for build
 Based on the work of Colin Snover (csnover), Cameron Cawley (ccawley2011) and Le Philousophe (lephilousophe).
 
 Cross-compiled libraries are:
+- libiconv-1.16                                            -- http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
 - libpng-1.6.37                                            -- https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
 - freetype-2.10.1                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz
 - libjpeg-turbo-1.5.3                                      -- https://download.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.3.tar.gz
