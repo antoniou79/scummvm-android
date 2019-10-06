@@ -30,6 +30,7 @@ WORKDIR /tmp/compile
 ENV ANDROID_USR_OPT_PATH=/opt/toolchains/android
 ENV PLATFORM_MIN_API_VERSION=9
 ENV PLATFORM_MIN_API_x64_VERSION=21
+#ENV PLATFORM_MIN_API_x64_VERSION=23
 ENV NDK_VERSION=r14b
 RUN mkdir -p ${ANDROID_USR_OPT_PATH}/ && \
   wget --progress=bar:force:noscroll -O ndk.zip \
@@ -95,14 +96,14 @@ RUN cd android-ndk-*/ && \
     ln -s ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86_64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION} \
           ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/toolchains/x86_64-4.9/prebuilt/linux-x86_64 && \
     #
-    # platform android-9 symbolic links (to arm and x86)
+    # platform android-${PLATFORM_MIN_API_VERSION} symbolic links (to arm and x86)
     mkdir -p ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_VERSION} && \
     ln -s ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot \
           ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_VERSION}/arch-arm  && \
     ln -s ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot \
           ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_VERSION}/arch-x86 && \
     #
-    # platform android-21 symbolic links (to arm64 and x86_64)
+    # platform android-${PLATFORM_MIN_API_x64_VERSION} symbolic links (to arm64 and x86_64)
     mkdir -p ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_x64_VERSION} && \
     ln -s ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot \
           ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/platforms/android-${PLATFORM_MIN_API_x64_VERSION}/arch-arm64 && \
