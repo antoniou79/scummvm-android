@@ -181,6 +181,7 @@ ENV VANILLA_PATH=$PATH
 # ----
 # Using:
 # [*] zlib : Android NDK comes with a suitable zlib already
+# [*] libiconv-1.16                                            -- http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
 # [*] libpng-1.6.37                                            -- https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
 # [*] freetype-2.10.1                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz
 # [*] libjpeg-turbo-1.5.3                                      -- https://download.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.3.tar.gz
@@ -216,6 +217,9 @@ ENV ANDROID_STANDALONE_TRIBLE=arm-linux-androideabi
 ENV PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
 
 RUN  ./cleanup-all-libraries-src-android.sh
+COPY ./library-rules/libiconv.sh library-rules/
+RUN  ./compile-libraries-android-arm.sh libiconv
+
 COPY ./library-rules/libpng1.6.sh library-rules/
 RUN  ./compile-libraries-android-arm.sh libpng1.6
 
@@ -262,43 +266,20 @@ ENV ANDROID_STANDALONE_TRIBLE=aarch64-linux-android
 ENV PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
 
 RUN  ./cleanup-all-libraries-src-android.sh
-COPY ./library-rules/libpng1.6.sh library-rules/
+
+RUN  ./compile-libraries-android-arm64.sh libiconv
 RUN  ./compile-libraries-android-arm64.sh libpng1.6
-
-COPY ./library-rules/freetype.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh freetype
-
-COPY ./library-rules/libjpeg-turbo.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh libjpeg-turbo
-
-COPY ./library-rules/faad2.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh faad2
-
-COPY ./library-rules/libmad.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh libmad
-
-COPY ./library-rules/libogg.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh libogg
-
-COPY ./library-rules/libtheora.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh libtheora
-
-COPY ./library-rules/libvorbis.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh libvorbis
-
-COPY ./library-rules/flac.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh flac
-
-COPY ./library-rules/mpeg2dec.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh mpeg2dec
-
-COPY ./library-rules/curl.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh curl
-
-COPY ./library-rules/fluidsynth-lite.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh fluidsynth-lite
-
-COPY ./library-rules/a52dec.sh library-rules/
 RUN  ./compile-libraries-android-arm64.sh a52dec
 
 # ----
@@ -308,43 +289,20 @@ ENV ANDROID_STANDALONE_TRIBLE=i686-linux-android
 ENV PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
 
 RUN  ./cleanup-all-libraries-src-android.sh
-COPY ./library-rules/libpng1.6.sh library-rules/
+
+RUN  ./compile-libraries-android-x86.sh libiconv
 RUN  ./compile-libraries-android-x86.sh libpng1.6
-
-COPY ./library-rules/freetype.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh freetype
-
-COPY ./library-rules/libjpeg-turbo.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh libjpeg-turbo
-
-COPY ./library-rules/faad2.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh faad2
-
-COPY ./library-rules/libmad.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh libmad
-
-COPY ./library-rules/libogg.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh libogg
-
-COPY ./library-rules/libtheora.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh libtheora
-
-COPY ./library-rules/libvorbis.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh libvorbis
-
-COPY ./library-rules/flac.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh flac
-
-COPY ./library-rules/mpeg2dec.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh mpeg2dec
-
-COPY ./library-rules/curl.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh curl
-
-COPY ./library-rules/fluidsynth-lite.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh fluidsynth-lite
-
-COPY ./library-rules/a52dec.sh library-rules/
 RUN  ./compile-libraries-android-x86.sh a52dec
 
 # ----
@@ -354,43 +312,20 @@ ENV ANDROID_STANDALONE_TRIBLE=x86_64-linux-android
 ENV PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
 
 RUN  ./cleanup-all-libraries-src-android.sh
-COPY ./library-rules/libpng1.6.sh library-rules/
+
+RUN  ./compile-libraries-android-x86_64.sh libiconv
 RUN  ./compile-libraries-android-x86_64.sh libpng1.6
-
-COPY ./library-rules/freetype.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh freetype
-
-COPY ./library-rules/libjpeg-turbo.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh libjpeg-turbo
-
-COPY ./library-rules/faad2.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh faad2
-
-COPY ./library-rules/libmad.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh libmad
-
-COPY ./library-rules/libogg.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh libogg
-
-COPY ./library-rules/libtheora.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh libtheora
-
-COPY ./library-rules/libvorbis.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh libvorbis
-
-COPY ./library-rules/flac.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh flac
-
-COPY ./library-rules/mpeg2dec.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh mpeg2dec
-
-COPY ./library-rules/curl.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh curl
-
-COPY ./library-rules/fluidsynth-lite.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh fluidsynth-lite
-
-COPY ./library-rules/a52dec.sh library-rules/
 RUN  ./compile-libraries-android-x86_64.sh a52dec
 
 #

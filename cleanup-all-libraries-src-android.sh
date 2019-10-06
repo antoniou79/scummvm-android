@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm -rf ./libiconv*
 rm -rf ./pkg-config*
 rm -rf ./pkgconf*
 rm -rf ./libpng*
