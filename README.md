@@ -20,8 +20,8 @@ Cross-compiled libraries are:
 - a52dec-0.7.4
 
 Basic instructions:
-- Install docker (community edition shold work fine) (tested with version 19.03.2, build 6a30dfc on Linux Ubuntu x64 16.04.6 LTS)
-- Install docker-compose on your system (tested with version 1.24.1, build 4667896b)
+- Install docker ("Docker Engine - Community" should work fine). Tested with version 19.03.2, build 6a30dfc on Linux Ubuntu x64 16.04.6 LTS
+- Install docker-compose on your system. Tested with version 1.24.1, build 4667896b
 
 - Build the image with:
 ```
@@ -47,11 +47,15 @@ make clean; ./configure --enable-engine=testbed --host=android-arm64-v8a --enabl
 make -j$(nproc)
 ```
 
-- The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy it elsewhere before running make clean and starting to build for another architecture.
+- The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy this file elsewhere before running "make clean" and starting to build for another architecture.
 
-Todo: 
-- Test adding support for more third party libraries
+TODO:
+- Test adding support for more third party libraries (eg. pkg-config, OpenSSL)
 - Test possible transition to building with gradle without losing minimum API support
+- Organize the files better in a folder structure
+- Create another Dockerfile and script assets for the setup to build the old Android SDL port (uses SDL 1.2)
+- Create another Dockerfile and script assets for the setup to build the non-SDL port with the most recent version of NDK (this will probably result to the loss of supported older devices)
+- Experiment with possible SDL2 integration (?)
 
 Reference links:
 - Scummvm repository: https://github.com/scummvm/scummvm
