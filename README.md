@@ -35,15 +35,15 @@ docker build -t "scummvm/scummvm-android:latest" -f "./Dockerfile" .
 docker-compose run --rm android
 ```
 
-- From within the container, navigate to /data/sharedrepo, where the scummvm repo should be mounted. Then run the setenv-android.sh script. This script has to be run only once per container session.
+- From within the container, navigate to /data/sharedrepo, where the scummvm repo should be mounted. Then run the "setenv-android.sh" script. This script has to be run only once per container session.
 ```
 cd /data/sharedrepo
 source $ANDROID_USR_OPT_PATH/setenv-android.sh
 ```
-- Then run the following sequence of commands depending on the architecture you are targetting. Example:
+- Then run the following sequence of commands, using the appropriate "setenv-android-build-xxxxx.sh" script and setting the proper target architecture as the "--host" argument depending on the architecture you are targetting (supported target architecture values are: android-arm, android-arm-v7a, android-arm64-v8a, android-x86 and android-x86_64). Example:
 ```
 source $ANDROID_USR_OPT_PATH/setenv-android-build-arm64-v8a.sh
-make clean; ./configure --enable-all-engines --disable-engine=testbed --enable-verbose-build --host=android-arm64-v8a  --disable-mt32emu --enable-debug
+make clean; ./configure --enable-engine=testbed --host=android-arm64-v8a --enable-verbose-build --enable-debug
 make -j$(nproc)
 ```
 
