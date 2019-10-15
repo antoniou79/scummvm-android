@@ -50,7 +50,7 @@ make -j$(nproc)
 - The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy this file elsewhere before running "make clean" and starting to build for another architecture.
 
 TODO:
-- Test adding support for more third party libraries (eg. pkg-config, OpenSSL)
+- Test adding support for more third party libraries (eg. pkg-config, OpenSSL, also: more updated libjpeg-turbo (2.0.3+))
 - Test possible transition to building with gradle without losing minimum API support
 - Organize the files better in a folder structure
 - Create another Dockerfile and script assets for the setup to build the old Android SDL port (uses SDL 1.2)
