@@ -11,7 +11,14 @@ fi
 
 cd libjpeg-turbo-${JPEGTURBO_VERSION} || exit 128
 
-do_configure --without-turbojpeg
+if [ $host == "i686-linux-android" ]
+then
+#   https://github.com/libjpeg-turbo/libjpeg-turbo/issues/155
+	do_configure --without-turbojpeg --with-pic
+else
+	do_configure --without-turbojpeg
+fi
+
 do_make -C simd
 make  \
 	install-libLTLIBRARIES \
