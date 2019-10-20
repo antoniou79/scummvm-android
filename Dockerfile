@@ -1,10 +1,18 @@
-ARG DEFAULT_OS_IMAGE=debian:9.2
+# Debian "Stretch" 9.0 was initially released on June 17th, 2017 - Using: openjdk-8-jre-headless
+#ARG DEFAULT_OS_IMAGE=debian:9.2
+# Debian "Buster" 10.1 is stable since September 7th, 2019
+#                      openjdk-8 is no longer supported in Debian 10+ as of yet
+#                      openjdk-11 is the supported package, but it is not compatible with sdk-manager!
+#                      We can install openjdk-8 by adding the Debian Unstable distribution (sid)
+ARG DEFAULT_OS_IMAGE=debian:10.1
 FROM ${DEFAULT_OS_IMAGE} AS compiler
 #
 # Building the toolchains stage
 USER root
 
-RUN apt-get update && \
+# use SID repository to get openjdk-8
+RUN echo "deb http://ftp.us.debian.org/debian sid main" >> /etc/apt/sources.list && \
+  apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
   ccache \
   dumb-init \
@@ -144,7 +152,7 @@ RUN wget --progress=bar:force:noscroll -O sdk.zip \
 #
 # Run sdkmanager and install "build-tools;25.0.3"
 #                        and "platform-tools"  (this is 29.0.4)
-#                        and "platforms;android-26" (version 2)
+#                        and "platforms;android-28" (version 6)
 #
 # The sdkmanager --list will read something like:
 # Installed packages:
@@ -152,13 +160,13 @@ RUN wget --progress=bar:force:noscroll -O sdk.zip \
 #  -------              | ------- | -------                        | -------              
 #  build-tools;25.0.3   | 25.0.3  | Android SDK Build-Tools 25.0.3 | build-tools/25.0.3/  
 #  platform-tools       | 29.0.4  | Android SDK Platform-Tools     | platform-tools/      
-#  platforms;android-26 | 2       | Android SDK Platform 26        | platforms/android-26/
+#  platforms;android-28 | 6       | Android SDK Platform 28        | platforms/android-28/
 #  tools                | 25.2.5  | Android SDK Tools 25.2.5       | tools/    
 #
    yes | ${ANDROID_USR_OPT_PATH}/android-sdk-linux_x86/tools/bin/sdkmanager \
             "build-tools;25.0.3" \
             platform-tools \
-            "platforms;android-26"
+            "platforms;android-28"
 #
 # CROSS COMPILING THIRD PARTY LIBRARIES
 # 
@@ -207,6 +215,7 @@ COPY ./compile-libraries.sh \
      ./configure-freetype.patch \
      ./patch-x86-vorbis-clang.patch \
      ./macros-flac-1.3.3.patch \
+     ./patch-mpeg2dec-confac.patch \
      ./cleanup-all-libraries-src-android.sh \
      ./
 
@@ -354,7 +363,8 @@ RUN mkdir -p /home/scummvm /data/ccache /data/sharedrepo && \
      chown scummvm:scummvm /home/scummvm /data/ccache /data/sharedrepo
 #
 # Get useful packages
-RUN apt-get update && \
+RUN echo "deb http://ftp.us.debian.org/debian sid main" >> /etc/apt/sources.list && \
+           apt-get update && \
            DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
            ccache \
            dumb-init \
