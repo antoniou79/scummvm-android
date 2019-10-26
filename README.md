@@ -31,8 +31,8 @@ Cross-compiled libraries are:
 - a52dec-0.7.4                                             -- Debian 10.1 distribution package (0.7.4-19 ?)
 
 Basic instructions:
-- Install docker ("Docker Engine - Community" should work fine). Tested with version 19.03.2, build 6a30dfc on Linux Ubuntu x64 16.04.6 LTS
-- Install docker-compose on your system. Tested with version 1.24.1, build 4667896b
+- Install docker ("Docker Engine - Community" should work fine). Tested with version 19.03.4 (build 9013bf583a) using containerd.io version 1.2.10-3 on Linux Ubuntu x64 16.04.6 LTS.
+- Install docker-compose on your system. Tested with version 1.24.1 (build 4667896b).
 
 - Build the image with:
 ```
