@@ -1,4 +1,5 @@
 get_dependencies automake debhelper libtool quilt
+LIBMAD_VERSION=0.15.1b
 do_fetch
 
 # Unlike the other packages, for some reason libmad does not
@@ -15,4 +16,5 @@ touch NEWS AUTHORS ChangeLog
 autoreconf -fi
 
 do_configure
-make install-libLTLIBRARIES install-includeHEADERS
+make install-libLTLIBRARIES
+make install-includeHEADERS
