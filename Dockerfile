@@ -121,6 +121,7 @@ RUN cd android-ndk-*/ && \
     # Move of folders "build" and "sources" as is from original NDK folder
     mv build   ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build   && \
     mv sources ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/sources && \
+    mv ndk-build ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/ndk-build && \
     rm -rf /tmp/compile
 #
 # SETTING UP THE SDK
