@@ -22,6 +22,7 @@ patch -p1 < ../macros-flac-1.3.3.patch
 
 autoreconf -fi
 do_configure --disable-doxygen-docs --disable-xmms-plugin --disable-cpplibs --disable-ogg
-make -j$num_cpus -C src/libFLAC && make -C src/libFLAC install  && \
-# No need to build includes
-make  -C include install
+make -j$num_cpus -C src/libFLAC
+make -C src/libFLAC install
+# No need to build includes?
+make -C include install

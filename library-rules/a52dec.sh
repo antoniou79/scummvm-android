@@ -6,7 +6,7 @@ do_fetch
 dh_update_autotools_config
 
 do_configure
-make -j$num_cpus -C liba52 && \
-make -C liba52 install && \
-# No ned to build includes
+make -j$num_cpus -C liba52
+make -C liba52 install
+# No need to build includes?
 make -C include install

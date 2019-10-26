@@ -26,4 +26,5 @@ autoreconf -fi -I m4
 do_configure
 do_make -C lib
 do_make -C include
-make install-pkgconfigDATA install-m4dataDATA
+make install-pkgconfigDATA
+make install-m4dataDATA

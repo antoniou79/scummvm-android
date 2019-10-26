@@ -13,4 +13,3 @@ do_configure --disable-examples --disable-spec --disable-doc
 do_make -C lib
 do_make -C include
 make install-pkgconfigDATA
-

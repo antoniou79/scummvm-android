@@ -23,7 +23,7 @@ sed -i 's/arm\*)/xxarmxx)/' configure
 chmod +x configure
 
 do_configure
-make -j$num_cpus -C libmpeg2 && \
-make -C libmpeg2 install && \
-# No need to build includes
+make -j$num_cpus -C libmpeg2
+make -C libmpeg2 install
+# No need to build includes?
 make -C include install

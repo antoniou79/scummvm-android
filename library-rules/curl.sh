@@ -17,4 +17,5 @@ cd curl-${LIBCURL_VERSION} || exit 128
 do_configure --without-ssl
 do_make -C lib
 do_make -C include
-make install-pkgconfigDATA install-binSCRIPTS
+make install-pkgconfigDATA
+make install-binSCRIPTS
