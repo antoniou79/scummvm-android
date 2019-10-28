@@ -122,6 +122,7 @@ RUN cd android-ndk-*/ && \
     mv build   ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build   && \
     mv sources ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/sources && \
     mv ndk-build ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/ndk-build && \
+	mv source.properties ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/source.properties &&\
     rm -rf /tmp/compile
 #
 # SETTING UP THE SDK
@@ -182,6 +183,7 @@ RUN sed 's/^deb \(.*\)/deb-src \1/' /etc/apt/sources.list \
         pkg-config
 
 ENV VANILLA_PATH=$PATH
+ENV ANDROID_NDK_HOME=${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}
 #
 # Note: Valid host tuples for us (which are used as is in the prefix too) would be:
 #            arm-linux-androideabi (arm)
@@ -192,10 +194,10 @@ ENV VANILLA_PATH=$PATH
 # Using:
 # [*] zlib : Android NDK comes with a suitable zlib already
 # [*] libiconv-1.16                                            -- http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
-# [*] libpng-1.6.37                                            -- https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
+# [*] libpng-1.6.37                                            -- https://github.com/glennrp/libpng/archive/v1.6.37.tar.gz
 # [*] freetype-2.10.1                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz
-# [*] libjpeg-turbo-1.5.3                                      -- https://download.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.3.tar.gz
-# [*] faad2-2.8.8                                              -- https://download.sourceforge.net/faac/faad2-src/faad2-2.8.0/faad2-2.8.8.tar.gz
+# [*] libjpeg-turbo-2.0.3                                      -- https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.3.tar.gz
+# [*] faad2-2.8.8                                              -- https://github.com/knik0/faad2/archive/2_8_8.tar.gz
 # [*] libmad_0.15.1b                                           -- Debian 10.1 Distribution package (0.15.1b ? is latest (but old))
 # [*] libogg_1.3.4                                             -- https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.4.tar.gz
 # [*] libtheora_1.1.1                                          -- Debian 10.1 Distribution package (1.1.1+dfsg.1-15 ?)
@@ -405,10 +407,6 @@ COPY ./setenv-android-build-armeabi-v7a.sh ${ANDROID_USR_OPT_PATH}/
 COPY ./setenv-android-build-arm64-v8a.sh   ${ANDROID_USR_OPT_PATH}/
 COPY ./setenv-android-build-x86.sh         ${ANDROID_USR_OPT_PATH}/
 COPY ./setenv-android-build-x86_64.sh      ${ANDROID_USR_OPT_PATH}/
-
-# ScummVM configure-specific
-ENV ANDROID_NDK=${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build \
-	ANDROID_SDK=${ANDROID_USR_OPT_PATH}/android-sdk-linux_x86
 
 USER scummvm
 WORKDIR /home/scummvm

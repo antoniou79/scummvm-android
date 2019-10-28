@@ -1,19 +1,19 @@
 get_dependencies automake libtool
 #do_fetch
 
-LIBFAAD2_VERSION_MAJ=2.8.0
-LIBFAAD2_VERSION_SPECIFIC=2.8.8
 
-if [ ! -d faad2-${LIBFAAD2_VERSION_SPECIFIC} ]
+LIBFAAD2_VERSION_UNDERSCORED=2_8_8
+
+if [ ! -d faad2-${LIBFAAD2_VERSION_UNDERSCORED} ]
 then
-    if [ ! -f faad2-${LIBFAAD2_VERSION_SPECIFIC}.tar.gz ]
+    if [ ! -f faad2-${LIBFAAD2_VERSION_UNDERSCORED}.tar.gz ]
     then
-        wget https://download.sourceforge.net/faac/faad2-src/faad2-${LIBFAAD2_VERSION_MAJ}/faad2-${LIBFAAD2_VERSION_SPECIFIC}.tar.gz || exit 128
+        wget -O faad2-${LIBFAAD2_VERSION_UNDERSCORED}.tar.gz https://github.com/knik0/faad2/archive/${LIBFAAD2_VERSION_UNDERSCORED}.tar.gz || exit 128
     fi
-    tar xzf faad2-${LIBFAAD2_VERSION_SPECIFIC}.tar.gz || exit 128
+    tar xzf faad2-${LIBFAAD2_VERSION_UNDERSCORED}.tar.gz || exit 128
 fi
 
-cd faad2-${LIBFAAD2_VERSION_SPECIFIC} || exit 128
+cd faad2-${LIBFAAD2_VERSION_UNDERSCORED} || exit 128
 
 # Avoid compiling and installing libfaad2_drm
 sed -ie 's/^\(lib_LTLIBRARIES.*\) libfaad_drm.la/\1/' libfaad/Makefile.am

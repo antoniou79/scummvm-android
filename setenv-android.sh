@@ -6,7 +6,7 @@ else
 	export NDK_VERSION=r14b
 	export PLATFORM_MIN_API_VERSION=9
 	export PLATFORM_MIN_API_x64_VERSION=21
-	export ANDROID_USR_OPT=/opt/toolchains/android/new-tool-ch201019
+	export ANDROID_USR_OPT=/opt/toolchains/android
 	export ANDROID_USR_OPT_PATH=$ANDROID_USR_OPT
 	export ANDROID_HOME=$ANDROID_USR_OPT/android-sdk-linux_x86
 	export ANDROID_NDK_HOME=$ANDROID_USR_OPT/android-ndk-$NDK_VERSION

@@ -16,10 +16,10 @@ OpenJDK Runtime Environment (build 1.8.0_232-8u232-b09-1-b09)
 
 Cross-compiled libraries are:
 - libiconv-1.16                                            -- http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
-- libpng-1.6.37                                            -- https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
+- libpng-1.6.37                                            -- https://github.com/glennrp/libpng/archive/v1.6.37.tar.gz
 - freetype-2.10.1                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.1.tar.gz
-- libjpeg-turbo-1.5.3                                      -- https://download.sourceforge.net/libjpeg-turbo/libjpeg-turbo-1.5.3.tar.gz
-- faad2-2.8.8                                              -- https://download.sourceforge.net/faac/faad2-src/faad2-2.8.0/faad2-2.8.8.tar.gz
+- libjpeg-turbo-2.0.3                                      -- https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.3.tar.gz
+- faad2-2.8.8                                              -- https://github.com/knik0/faad2/archive/2\_8\_8.tar.gz
 - libmad_0.15.1b                                           -- Debian 10.1 distribution package (0.15.1b) is latest (but old)
 - libogg_1.3.4                                             -- https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.4.tar.gz
 - libtheora_1.1.1                                          -- Debian 10.1 distribution package (1.1.1+dfsg.1-15 ?)
@@ -61,7 +61,7 @@ make -j$(nproc)
 - The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy this file elsewhere before running "make clean" and starting to build for another architecture.
 
 TODO:
-- Test adding support for more third party libraries (eg. OpenSSL, also: more updated libjpeg-turbo (2.0.3+))
+- Test adding support for more third party libraries (eg. OpenSSL, also: more updated libraries, faad2 (2.9.0), text to speech support)
 - Test possible transition to building with gradle without losing minimum API support
 - Organize the files better in a folder structure
 - Create another Dockerfile and script assets for the setup to build the old Android SDL port (uses SDL 1.2)
