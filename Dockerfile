@@ -122,7 +122,16 @@ RUN cd android-ndk-*/ && \
     mv build   ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/build   && \
     mv sources ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/sources && \
     mv ndk-build ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/ndk-build && \
-	mv source.properties ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/source.properties &&\
+	mv source.properties ${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}/source.properties && \
+	# copy the uchar.h and complex.h file which is missing from API-9 platforms. We borrow it from the x64 platforms (should be ok). Needed for openssl building.
+	cp ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot/usr/include/uchar.h \
+        ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot/usr/include && \
+    cp ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86_64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot/usr/include/uchar.h \
+        ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot/usr/include && \
+	cp ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot/usr/include/complex.h \
+        ${ANDROID_USR_OPT_PATH}/standalone-toolchain-arm-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot/usr/include && \
+    cp ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86_64-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_x64_VERSION}/sysroot/usr/include/complex.h \
+        ${ANDROID_USR_OPT_PATH}/standalone-toolchain-x86-ndk-${NDK_VERSION}-api-${PLATFORM_MIN_API_VERSION}/sysroot/usr/include && \
     rm -rf /tmp/compile
 #
 # SETTING UP THE SDK
@@ -204,7 +213,8 @@ ENV ANDROID_NDK_HOME=${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}
 # [*] libvorbis-1.3.6                                          -- https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz
 # [*] flac_1.3.3                                               -- https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.3.tar.xz
 # [*] mpeg2dec_0.5.1-7                                         -- https://salsa.debian.org/multimedia-team/mpeg2dec.git (0.5.1 is latest (but old))
-# [*] curl_7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz, built *without ssl*
+# [*] openssl 1.1.1d                                           -- https://github.com/openssl/openssl/archive/OpenSSL_1_1_1d.tar.gz
+# [*] curl 7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz
 # [*] fluidsynth-lite-38353444676a1788ef78eb7f835fba4fa061f3f2 -- https://github.com/Doom64/fluidsynth-lite/archive/38353444676a1788ef78eb7f835fba4fa061f3f2.tar.gz (Apr 6, 2019)
 # [*] a52dec-0.7.4                                             -- Debian 10.1 distribution package (0.7.4-19 ?)
 # 
@@ -263,6 +273,9 @@ RUN  ./compile-libraries-android-arm.sh flac
 COPY ./library-rules/mpeg2dec.sh library-rules/
 RUN  ./compile-libraries-android-arm.sh mpeg2dec
 
+COPY ./library-rules/openssl.sh library-rules/
+RUN  ./compile-libraries-android-arm.sh openssl
+
 COPY ./library-rules/curl.sh library-rules/
 RUN  ./compile-libraries-android-arm.sh curl
 
@@ -291,6 +304,7 @@ RUN  ./compile-libraries-android-arm64.sh libtheora
 RUN  ./compile-libraries-android-arm64.sh libvorbis
 RUN  ./compile-libraries-android-arm64.sh flac
 RUN  ./compile-libraries-android-arm64.sh mpeg2dec
+RUN  ./compile-libraries-android-arm64.sh openssl
 RUN  ./compile-libraries-android-arm64.sh curl
 RUN  ./compile-libraries-android-arm64.sh fluidsynth-lite
 RUN  ./compile-libraries-android-arm64.sh a52dec
@@ -314,6 +328,7 @@ RUN  ./compile-libraries-android-x86.sh libtheora
 RUN  ./compile-libraries-android-x86.sh libvorbis
 RUN  ./compile-libraries-android-x86.sh flac
 RUN  ./compile-libraries-android-x86.sh mpeg2dec
+RUN  ./compile-libraries-android-x86.sh openssl
 RUN  ./compile-libraries-android-x86.sh curl
 RUN  ./compile-libraries-android-x86.sh fluidsynth-lite
 RUN  ./compile-libraries-android-x86.sh a52dec
@@ -337,6 +352,7 @@ RUN  ./compile-libraries-android-x86_64.sh libtheora
 RUN  ./compile-libraries-android-x86_64.sh libvorbis
 RUN  ./compile-libraries-android-x86_64.sh flac
 RUN  ./compile-libraries-android-x86_64.sh mpeg2dec
+RUN  ./compile-libraries-android-x86_64.sh openssl
 RUN  ./compile-libraries-android-x86_64.sh curl
 RUN  ./compile-libraries-android-x86_64.sh fluidsynth-lite
 RUN  ./compile-libraries-android-x86_64.sh a52dec

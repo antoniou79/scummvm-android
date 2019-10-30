@@ -6,7 +6,7 @@ services:
 # don't mount directly to the home directory of scummvm user in the container
 # because that will override setting its ownership to scummvm:scummvm
 # The mounting points are all created with owner root
-      - /home/antoniou/scummvm-android:/home/scummvm/.android
-      - /home/antoniou/Workspace/scummvm:/data/sharedrepo
+      - /your-local-path-here-to-android-folder-for-keys-and-licenses:/home/scummvm/.android
+      - /your-locel-path-here-to-your-copy-of-scummvm-repository:/data/sharedrepo
     entrypoint: /bin/bash
 

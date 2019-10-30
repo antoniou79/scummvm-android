@@ -26,7 +26,8 @@ Cross-compiled libraries are:
 - libvorbis-1.3.6                                          -- https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz
 - flac_1.3.3                                               -- https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.3.tar.xz
 - mpeg2dec_0.5.1-7                                         -- https://salsa.debian.org/multimedia-team/mpeg2dec.git (0.5.1 is latest (but old))
-- curl_7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz, built *without ssl*
+- openssl 1.1.1d                                           -- https://github.com/openssl/openssl/archive/OpenSSL\_1\_1\_1d.tar.gz
+- curl_7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz
 - fluidsynth-lite-38353444676a1788ef78eb7f835fba4fa061f3f2 -- https://github.com/Doom64/fluidsynth-lite/archive/38353444676a1788ef78eb7f835fba4fa061f3f2.tar.gz (Apr 6, 2019)
 - a52dec-0.7.4                                             -- Debian 10.1 distribution package (0.7.4-19 ?)
 
@@ -62,8 +63,10 @@ make -j$(nproc)
 
 TODO:
 - Test adding support for more third party libraries (eg. OpenSSL, also: more updated libraries, faad2 (2.9.0), text to speech support)
-- Test possible transition to building with gradle without losing minimum API support
+- Cleaner cross-compiling for arm-v7a
+- Consider moving all cross-compiled 3rd party libraries in separate folders outside the standalone NDK toolchains
 - Organize the files better in a folder structure
+- Test possible transition to building with gradle without losing minimum API support
 - Create another Dockerfile and script assets for the setup to build the old Android SDL port (uses SDL 1.2)
 - Create another Dockerfile and script assets for the setup to build the non-SDL port with the most recent version of NDK (this will probably result to the loss of supported older devices)
 - Experiment with possible SDL2 integration (?)

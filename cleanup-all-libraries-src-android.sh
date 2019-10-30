@@ -14,6 +14,7 @@ rm -rf ./libvorbis*
 rm -rf ./flac*
 rm -rf ./mpeg2dec*
 rm -rf ./openssl*
+rm -rf ./Openssl*
 rm -rf ./curl*
 rm -rf ./libsdl2*
 rm -rf ./libsdl2-net*
