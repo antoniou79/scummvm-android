@@ -234,7 +234,8 @@ ENV ANDROID_NDK_HOME=${ANDROID_USR_OPT_PATH}/android-ndk-${NDK_VERSION}
 # [*] curl 7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz
 # [*] fluidsynth-lite-38353444676a1788ef78eb7f835fba4fa061f3f2 -- https://github.com/Doom64/fluidsynth-lite/archive/38353444676a1788ef78eb7f835fba4fa061f3f2.tar.gz (Apr 6, 2019)
 # [*] a52dec-0.7.4                                             -- Debian 10.1 distribution package (0.7.4-19 ?)
-# /scripts/thirdPartyLibraries
+# [*] libsdl2-net-2.0.1                                        -- https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.tar.gz
+#
 # ----
 WORKDIR /tmp/compile
 COPY ./scripts/thirdPartyLibraries/compile-libraries.sh \
@@ -250,6 +251,7 @@ COPY ./scripts/thirdPartyLibraries/compile-libraries.sh \
      ./scripts/thirdPartyLibraries/patches/forSDL2NetFiles.patch \
 #     ./scripts/thirdPartyLibraries/patches/SDL2Configure.patch \
      ./
+##
 ## -- REMOVED (was for SDL2 )--
 ## for SDL2 (though, probably could build it without esd though)
 #RUN mkdir -p ${ANDROID_NDK_HOME}/sources/third_party/esd/include/

@@ -30,6 +30,7 @@ Cross-compiled libraries are:
 - curl_7.66.0                                              -- https://curl.haxx.se/download/curl-7.66.0.tar.gz
 - fluidsynth-lite-38353444676a1788ef78eb7f835fba4fa061f3f2 -- https://github.com/Doom64/fluidsynth-lite/archive/38353444676a1788ef78eb7f835fba4fa061f3f2.tar.gz (Apr 6, 2019)
 - a52dec-0.7.4                                             -- Debian 10.1 distribution package (0.7.4-19 ?)
+- libsdl2-net-2.0.1                                        -- https://www.libsdl.org/projects/SDL\_net/release/SDL2\_net-2.0.1.tar.gz
 
 Basic instructions:
 - Install docker ("Docker Engine - Community" should work fine). Tested with version 19.03.4 (build 9013bf583a) using containerd.io version 1.2.10-3 on Linux Ubuntu x64 16.04.6 LTS.
@@ -62,10 +63,10 @@ make -j$(nproc)
 - The output APK will be created as ScummVM-debug.apk in the current folder. Make sure to move or copy this file elsewhere before running "make clean" and starting to build for another architecture.
 
 TODO:
-- Test adding support for more third party libraries (eg. OpenSSL, also: more updated libraries, faad2 (2.9.0), text to speech support)
 - Cleaner cross-compiling for arm-v7a
+- Test adding support for more third party libraries (eg. more updated libraries, faad2 (2.9.0))
+- Test with text to speech support for Android (Google text to speech: https://play.google.com/store/apps/details?id=com.google.android.tts&hl=en_US)
 - Consider moving all cross-compiled 3rd party libraries in separate folders outside the standalone NDK toolchains
-- Organize the files better in a folder structure
 - Test possible transition to building with gradle without losing minimum API support
 - Create another Dockerfile and script assets for the setup to build the old Android SDL port (uses SDL 1.2)
 - Create another Dockerfile and script assets for the setup to build the non-SDL port with the most recent version of NDK (this will probably result to the loss of supported older devices)
