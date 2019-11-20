@@ -247,8 +247,17 @@ COPY ./scripts/thirdPartyLibraries/compile-libraries.sh \
      ./scripts/thirdPartyLibraries/patches/patch-x86-vorbis-clang.patch \
      ./scripts/thirdPartyLibraries/patches/macros-flac-1.3.3.patch \
      ./scripts/thirdPartyLibraries/patches/patch-mpeg2dec-confac.patch \
+     ./scripts/thirdPartyLibraries/patches/forSDL2NetFiles.patch \
+#     ./scripts/thirdPartyLibraries/patches/SDL2Configure.patch \
      ./
-
+## -- REMOVED (was for SDL2 )--
+## for SDL2 (though, probably could build it without esd though)
+#RUN mkdir -p ${ANDROID_NDK_HOME}/sources/third_party/esd/include/
+#COPY ./extras/esd/audiofile.h \
+#     ./extras/esd/aupvlist.h \
+#     ./extras/esd/esd.h \
+#     ${ANDROID_NDK_HOME}/sources/third_party/esd/include/
+## -- END OF: REMOVED (was for SDL2) --
 # --------------------------------------------------------------------------------------------------------
 # Cross-compile for arm (eabi)
 # [TODO] set specific options for every lib, update all scripts!
@@ -306,6 +315,12 @@ RUN  ./compile-libraries-android-arm.sh fluidsynth-lite
 COPY ./scripts/thirdPartyLibraries/library-rules/a52dec.sh library-rules/
 RUN  ./compile-libraries-android-arm.sh a52dec
 
+#COPY ./scripts/thirdPartyLibraries/library-rules/libsdl2.sh library-rules/
+#RUN  ./compile-libraries-android-arm.sh libsdl2
+
+COPY ./scripts/thirdPartyLibraries/library-rules/libsdl2-net.sh library-rules/
+RUN  ./compile-libraries-android-arm.sh libsdl2-net
+
 # --------------------------------------------------------------------------------------------------------
 # Cross-compile for arm-v7a (uses same standalone toolchain as armeabi-v5te but different linking options)
 # [!!!!] TODO: recheck/set specific options for every lib, create and/or update all scripts!]
@@ -331,6 +346,8 @@ RUN  ./compile-libraries-android-arm.sh a52dec
 #RUN  ./compile-libraries-android-arm-v7a.sh curl
 #RUN  ./compile-libraries-android-arm-v7a.sh fluidsynth-lite
 #RUN  ./compile-libraries-android-arm-v7a.sh a52dec
+##RUN  ./compile-libraries-android-arm-v7a.sh libsdl2
+#RUN  ./compile-libraries-android-arm-v7a.sh libsdl2-net
 # --------------------------------------------------------------------------------------------------------
 # Cross-compile for arm64
 #
@@ -355,6 +372,8 @@ RUN  ./compile-libraries-android-arm64.sh openssl
 RUN  ./compile-libraries-android-arm64.sh curl
 RUN  ./compile-libraries-android-arm64.sh fluidsynth-lite
 RUN  ./compile-libraries-android-arm64.sh a52dec
+#RUN  ./compile-libraries-android-arm64.sh libsdl2
+RUN  ./compile-libraries-android-arm64.sh libsdl2-net
 
 # --------------------------------------------------------------------------------------------------------
 # Cross-compile for x86
@@ -380,6 +399,8 @@ RUN  ./compile-libraries-android-x86.sh openssl
 RUN  ./compile-libraries-android-x86.sh curl
 RUN  ./compile-libraries-android-x86.sh fluidsynth-lite
 RUN  ./compile-libraries-android-x86.sh a52dec
+#RUN  ./compile-libraries-android-x86.sh libsdl2
+RUN  ./compile-libraries-android-x86.sh libsdl2-net
 
 # --------------------------------------------------------------------------------------------------------
 # Cross-compile for x86_64
@@ -405,6 +426,8 @@ RUN  ./compile-libraries-android-x86_64.sh openssl
 RUN  ./compile-libraries-android-x86_64.sh curl
 RUN  ./compile-libraries-android-x86_64.sh fluidsynth-lite
 RUN  ./compile-libraries-android-x86_64.sh a52dec
+#RUN  ./compile-libraries-android-x86_64.sh libsdl2
+RUN  ./compile-libraries-android-x86_64.sh libsdl2-net
 
 #
 # --------------------------------------------------------------------------------------------------------

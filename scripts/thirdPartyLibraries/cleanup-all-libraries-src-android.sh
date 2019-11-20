@@ -15,9 +15,12 @@ rm -rf ./flac*
 rm -rf ./mpeg2dec*
 rm -rf ./openssl*
 rm -rf ./Openssl*
+rm -rf ./OpenSSL*
 rm -rf ./curl*
 rm -rf ./libsdl2*
 rm -rf ./libsdl2-net*
+rm -rf ./SDL2-*
+rm -rf ./SDL2_net-*
 rm -rf ./fluidsynth-lite*
 rm -rf ./a52dec*
 rm -rf ./nasm*

@@ -3,8 +3,8 @@
 if [ "$VANILLA_PATH" == "" ]; then
 	echo "Error: Variable VANILLA_PATH is not set! Please run script setenv-android.sh first!"
 else
-	export ANDROID_STANDALONE_TOOLCH=$ANDROID_NDK_HOME/toolchains/x86-4.9/prebuilt/linux-x86_64
 	export ANDROID_STANDALONE_TRIBLE=i686-linux-android
+	export ANDROID_STANDALONE_TOOLCH=$ANDROID_NDK_HOME/toolchains/x86-4.9/prebuilt/linux-x86_64
 	export PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
 	# clang++ is a wrapper script which sets up the Android API version correctly
 	#export CPPFLAGS=
