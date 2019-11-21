@@ -19,6 +19,11 @@ else
 	export NDK_LOG=1
 	export NDK_PLATFORMS_ROOT=$ANDROID_NDK_HOME/platforms
 	export NDK_TOOLCHAINS_ROOT=$ANDROID_NDK_HOME/toolchains
+	export LC_ALL=C
+	export CXX=
+	export CXXFLAGS=
+	export CPPFLAGS=
+	export LDFLAGS=
 	export CCACHE_COMPRESS=1
 	export PATH=$ANDROID_SDK_TOOLS:$ANDROID_SDK_BTOOLS:$PATH
 	export VANILLA_PATH=$PATH
