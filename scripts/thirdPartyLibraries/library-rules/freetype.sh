@@ -19,4 +19,7 @@ cd freetype-${LIBFREETYPE_VERSION} || exit 128
 patch -p1 < ../configure-freetype.patch
 
 do_configure --build="x86_64-linux-gnu"
-do_make
+# run make but not in parallel mode (no -j argument)
+# because for this library that tends to create issues during compilation and later on at detection
+make
+make install
