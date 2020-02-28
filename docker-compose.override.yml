@@ -6,7 +6,9 @@ services:
 # don't mount directly to the home directory of scummvm user in the container
 # because that will override setting its ownership to scummvm:scummvm
 # The mounting points are all created with owner root
+# the .bash_history file must pre-exist on the host's path (create as a file, give rw permissions for the docker user)
       - /home/antoniou/scummvm-android:/home/scummvm/.android
+      - /home/antoniou/scummvm-android/.bash_history:/home/scummvm/.bash_history
       - /home/antoniou/Workspace/scummvm:/data/sharedrepo
     entrypoint: /bin/bash
 
