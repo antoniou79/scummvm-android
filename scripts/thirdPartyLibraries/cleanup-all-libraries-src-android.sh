@@ -24,4 +24,5 @@ rm -rf ./SDL2_net-*
 rm -rf ./fluidsynth-lite*
 rm -rf ./a52dec*
 rm -rf ./nasm*
+rm -rf ./libfribidi*
 

@@ -2,7 +2,7 @@ get_dependencies automake libtool
 #do_fetch
 
 
-LIBFAAD2_VERSION_UNDERSCORED=2_8_8
+LIBFAAD2_VERSION_UNDERSCORED=2_9_2
 
 if [ ! -d faad2-${LIBFAAD2_VERSION_UNDERSCORED} ]
 then

@@ -1,17 +1,17 @@
 #do_fetch
 
-LIBCURL_VERSION=7.66.0
+LIBCURL_VERSION=7.71.1
 
 if [ $host == "arm-linux-androideabi" ]
 	then
-	CURL_TARGET="android-arm"
-	OPTIONS="--target=armv5te-linux-androideabi"
-	LDFLAGSADDED=""
-	LIBSADDED="-ldl -latomic"
-	# TODO for arm-v7a it would be:
-	#OPTIONS="--target=armv7a-linux-androideabi"
-	#LDFLAGSADDED="-Wl,--fix-cortex-a8"
+	#CURL_TARGET="android-arm"
+	#OPTIONS="--target=armv5te-linux-androideabi"
+	#LDFLAGSADDED=""
 	#LIBSADDED="-ldl -latomic"
+	# For arm-v7a:
+	OPTIONS="--target=armv7a-linux-androideabi"
+	LDFLAGSADDED="-Wl,--fix-cortex-a8"
+	LIBSADDED="-ldl -latomic"
 elif [ $host == "aarch64-linux-android" ]
 	then
 	CURL_TARGET="android-arm64"

@@ -1,6 +1,6 @@
 #do_fetch
 get_dependencies automake debhelper libtool
-LIBVORBIS_VERSION=1.3.6
+LIBVORBIS_VERSION=1.3.7
 
 if [ ! -d libvorbis-${LIBVORBIS_VERSION} ]
 then

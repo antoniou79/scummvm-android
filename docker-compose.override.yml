@@ -7,8 +7,8 @@ services:
 # because that will override setting its ownership to scummvm:scummvm
 # The mounting points are all created with owner root
 # the .bash_history file must pre-exist on the host's path (create as a file, give rw permissions for the docker user)
-      - /home/antoniou/scummvm-android:/home/scummvm/.android
-      - /home/antoniou/scummvm-android/.bash_history:/home/scummvm/.bash_history
-      - /home/antoniou/Workspace/scummvm:/data/sharedrepo
+      - /home/antoniou/android-scummvm:/home/scummvm/.android
+      - /home/antoniou/android-scummvm/.bash_history:/home/scummvm/.bash_history
+      - /home/antoniou/Workspace/scummvm-official:/data/sharedrepo
     entrypoint: /bin/bash
 

@@ -16,9 +16,9 @@ fi
 
 cd flac-${LIBFLAC_VERSION} || exit 128
 
-# NDK API 9 lacks defines for MIN and MAX so we add them explicitly to flac library
-# - otherwise linkage errors occur at ScummVM compile time
-patch -p1 < ../macros-flac-1.3.3.patch
+## NDK r14b API 9 lacks defines for MIN and MAX so we add them explicitly to flac library
+## - otherwise linkage errors occur at ScummVM compile time
+#patch -p1 < ../macros-flac-1.3.3.patch
 
 autoreconf -fi
 do_configure --disable-doxygen-docs --disable-xmms-plugin --disable-cpplibs --disable-ogg

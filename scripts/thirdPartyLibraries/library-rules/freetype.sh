@@ -3,7 +3,7 @@ get_dependencies gcc libc6-dev automake debhelper libtool
 #tar xf freetype-2*.tar.bz2
 #cd freetype*/
 
-LIBFREETYPE_VERSION=2.10.1
+LIBFREETYPE_VERSION=2.10.2
 
 if [ ! -d freetype-${LIBFREETYPE_VERSION} ]
 then

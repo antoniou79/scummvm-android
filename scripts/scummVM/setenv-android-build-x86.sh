@@ -3,38 +3,17 @@
 if [ "$VANILLA_PATH" == "" ]; then
 	echo "Error: Variable VANILLA_PATH is not set! Please run script setenv-android.sh first!"
 else
-	export ANDROID_STANDALONE_TRIBLE=i686-linux-android
-	export ANDROID_STANDALONE_TOOLCH=$ANDROID_NDK_HOME/toolchains/x86-4.9/prebuilt/linux-x86_64
-	export PATH=$ANDROID_STANDALONE_TOOLCH/bin:$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/bin:$VANILLA_PATH
-	# clang++ is a wrapper script which sets up the Android API version correctly
+	export ANDROID_TARGET_NDK_TOOLCHPREFIX=x86
+	export ANDROID_TARGET_NDK_LIBS_SUBPATH=i686
+	
+	export PATH=${ANDROID_TOOLCHAIN}/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:$ANDROID_USR_OPT_PATH/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/bin:$VANILLA_PATH
 	export CPPFLAGS=
-	export CXX="ccache $ANDROID_STANDALONE_TRIBLE-clang++"
-	export CXXFLAGS="-isystem $ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/include"
-	export LDFLAGS="-L$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/lib"
-	export PKG_CONFIG_LIBDIR=$ANDROID_STANDALONE_TOOLCH/$ANDROID_STANDALONE_TRIBLE/lib/pkgconfig
-	export CXXFILT=$ANDROID_STANDALONE_TRIBLE-c++filt
-	export CC=$ANDROID_STANDALONE_TRIBLE-clang
-	export CPP=$ANDROID_STANDALONE_TRIBLE-cpp
-	export DWP=$ANDROID_STANDALONE_TRIBLE-dwp
-	export ELFEDIT=$ANDROID_STANDALONE_TRIBLE-elfedit
-	export GXX=$ANDROID_STANDALONE_TRIBLE-g++
-	export GCC=$ANDROID_STANDALONE_TRIBLE-gcc
-	export GCOV=$ANDROID_STANDALONE_TRIBLE-gcov
-	export GCOV_TOOL=$ANDROID_STANDALONE_TRIBLE-gcov-tool
-	export GPROF=$ANDROID_STANDALONE_TRIBLE-gprof
-	export LD=$ANDROID_STANDALONE_TRIBLE-ld
-	export NM=$ANDROID_STANDALONE_TRIBLE-nm
-	export OBJCOPY=$ANDROID_STANDALONE_TRIBLE-objcopy
-	export OBJDUMP=$ANDROID_STANDALONE_TRIBLE-objdump
-	export RANLIB=$ANDROID_STANDALONE_TRIBLE-ranlib
-	export READELF=$ANDROID_STANDALONE_TRIBLE-readelf
-	export SIZE=$ANDROID_STANDALONE_TRIBLE-size
-	export STRINGS=$ANDROID_STANDALONE_TRIBLE-strings
-	export STRIP=$ANDROID_STANDALONE_TRIBLE-strip
-	export ADDR2LINE=$ANDROID_STANDALONE_TRIBLE-addr2line
-	export AR=$ANDROID_STANDALONE_TRIBLE-ar
-	export AS=$ANDROID_STANDALONE_TRIBLE-as
-
+	export CXX="ccache i686-linux-android16-clang++"
+	export CXXFLAGS="-isystem -i${ANDROID_TOOLCHAIN}/include -I${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/include"
+	export LDFLAGS="-L${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/lib -L${ANDROID_TOOLCHAIN}/lib"
+	
+	export PKG_CONFIG_LIBDIR=${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/lib/pkgconfig:${ANDROID_NDK_ROOT}/prebuilt/linux-x86_64/lib/pkgconfig
+		
 	echo "To build for Android x86..."
 	echo "From ScummVM source folder you may run *one* of the following configure commands or your own custom configure:"
 	echo "   make clean; ./configure --enable-all-engines --enable-verbose-build --host=android-x86 --enable-debug"

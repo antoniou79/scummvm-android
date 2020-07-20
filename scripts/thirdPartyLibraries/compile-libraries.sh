@@ -1,62 +1,36 @@
 #!/usr/bin/env bash
 
-usage() {
-	echo "Usage: $0 [--help] <host> <prefix> <library> [<library> ...]"
-	echo
-	echo "Builds libraries for the given cross-compiler toolchain."
-	echo
-	echo "<host>:    The host tuple (e.g. arm-apple-darwin11)."
-	echo "<prefix>:  The absolute path to the cross-compiler's root directory"
-	echo "           (i.e. the directory containing bin, lib, etc.)."
-	echo "<library>: The name of the library source package."
-}
-
 root_dir=$PWD
-#flags, orig_path are unused?
-flags=()
-orig_path=$PATH
+
+# ASDF NEEDS DEFINED ENV VARIABLES:
+# $ANDROID_NDK_ROOT
+# $ANDROID_NDK_HOST
+# $ANDROID_NDK_COMPILER
+# $ANDROID_LIBRARIES
+# $ANDROID_NDK_PLATFORM is not used in this script, but it is used in some of the library rules scripts
+#   eg. library-rules/libjpeg-turbo.sh
+#       library-rules/openssl.sh
+#   It is in the form of "android-16" or "android-21"
 
 # sets a few environment variables
 set_toolchain () {
-	local host=$1
-	local prefix=$2
-	local bin_dir="$prefix/bin"
+	local bin_dir="$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
-	for bin in $(find $bin_dir ${PATH//:/ } -maxdepth 1 -name "$host-*"); do
+	for bin in $(find $bin_dir -maxdepth 1 -name "$ANDROID_NDK_HOST-*"); do
 		local bin_name=$(basename $bin)
-		bin_name=${bin_name#$host-}
+		bin_name=${bin_name#$ANDROID_NDK_HOST-}
 		local var_name=${bin_name^^}
 		var_name=${var_name//+/X}
 		var_name=$(echo -n $var_name |sed "s/[^A-Z0-9_]/_/g")
 		export $var_name=$bin
 	done
 
-	# Preferring non-generic compiler binary names in CC/CXX, because on at
-	# least Android, clang/clang++ are wrappers which set the correct API level,
-	# and cc/c++ are the actual compilers, and not having the correct API level
-	# screws up system headers which were changed between API versions
+	export CC=$bin_dir/$ANDROID_NDK_COMPILER-clang
+	export CXX=$bin_dir/$ANDROID_NDK_COMPILER-clang++
 
-	if [ "$CLANG" != "" ]; then
-		export CC=$CLANG
-	elif [ "$GCC" != "" ]; then
-		export CC=$GCC
-	elif [ "$CC" == "" ]; then
-		warning "Could not find a C compiler"
-		exit 1
-	fi
-
-	if [ "$CLANGXX" != "" ]; then
-		export CXX=$CLANGXX
-	elif [ "$GXX" != "" ]; then
-		export CXX=$GXX
-	elif [ "$CXX" == "" ]; then
-		warning "Could not find a C++ compiler"
-		exit 1
-	fi
-
-	export ACLOCAL_PATH=$prefix/share/aclocal
-	export PKG_CONFIG_LIBDIR=$prefix/lib
-	export PKG_CONFIG_PATH=$prefix/lib/pkgconfig
+	export ACLOCAL_PATH=$ANDROID_LIBRARIES/share/aclocal
+	export PKG_CONFIG_LIBDIR=$ANDROID_LIBRARIES/lib
+	export PKG_CONFIG_PATH=$ANDROID_LIBRARIES/lib/pkgconfig
 }
 
 # get_dependencies() method is used in library_rules scripts!
@@ -73,7 +47,7 @@ do_fetch () {
 }
 
 do_configure () {
-	./configure --prefix=$prefix --host=$host --disable-shared $@
+	./configure --prefix=$ANDROID_LIBRARIES --host=$ANDROID_NDK_HOST --disable-shared $@
 }
 
 do_make () {
@@ -83,10 +57,9 @@ do_make () {
 
 num_cpus=$(nproc || grep -c ^processor /proc/cpuinfo || echo 1)
 build_library () {
-	host=$1
-	prefix=$2
-	library=$3
-
+	host=$ANDROID_NDK_HOST
+	prefix=$ANDROID_LIBRARIES
+	set -xe
 	local rules_file="$root_dir/library-rules/$library.sh"
 	if [ -f "$rules_file" ]; then
 		. "$rules_file"
@@ -118,35 +91,12 @@ fatal_error () {
 set -eE
 trap fatal_error ERR
 
-while [ $# -gt 0 ]; do
-	case arg in
-		--help)
-			usage
-			exit 0
-			;;
-		*)
-			break
-			;;
-	esac
-done
-
-if [ $# -lt 3 ]; then
-	usage
-	echo
-	echo "Error: Missing required arguments."
-	exit 1
-fi
-
-host=$1
-prefix=$2
-shift 2
 libraries=$@
 
-set_toolchain $host $prefix
-env
+set_toolchain
 echo $PATH
 for library in $libraries; do
 	echo "Building $library"
-	build_library $host $prefix $library
+	build_library $library
 	cd "$root_dir"
 done
