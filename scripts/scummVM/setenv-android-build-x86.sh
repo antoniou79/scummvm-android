@@ -1,18 +1,17 @@
 #!/bin/sh
 # VANILLA_PATH should be set after a call to the plain setenv_android.sh
 if [ "$VANILLA_PATH" == "" ]; then
-	echo "Error: Variable VANILLA_PATH is not set! Please run script setenv-android.sh first!"
+	echo "Error: Variable VANILLA_PATH is not set"
+elif [ "$ANDROID_USR_OPT_PATH" == "" ]; then
+	echo "Error: Variable ANDROID_USR_OPT_PATH is not set"
+elif [ "$ANDROID_TOOLCHAIN" == "" ]; then
+	echo "Error: Variable ANDROID_TOOLCHAIN is not set"
 else
-	export ANDROID_TARGET_NDK_TOOLCHPREFIX=x86
-	export ANDROID_TARGET_NDK_LIBS_SUBPATH=i686
-	
-	export PATH=${ANDROID_TOOLCHAIN}/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:$ANDROID_USR_OPT_PATH/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/bin:$VANILLA_PATH
-	export CPPFLAGS=
-	export CXX="ccache i686-linux-android16-clang++"
-	export CXXFLAGS="-isystem -i${ANDROID_TOOLCHAIN}/include -I${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/include"
-	export LDFLAGS="-L${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/lib -L${ANDROID_TOOLCHAIN}/lib"
-	
-	export PKG_CONFIG_LIBDIR=${ANDROID_USR_OPT_PATH}/libraries/${ANDROID_TARGET_NDK_LIBS_SUBPATH}/lib/pkgconfig:${ANDROID_NDK_ROOT}/prebuilt/linux-x86_64/lib/pkgconfig
+	export ANDROID_3RD_LIBS_PATH=${ANDROID_USR_OPT_PATH}/libraries/i686
+	export PATH=${ANDROID_TOOLCHAIN}/bin:${ANDROID_3RD_LIBS_PATH}/bin:${VANILLA_PATH}
+	export CXXFLAGS="-I${ANDROID_3RD_LIBS_PATH}/include"
+	export LDFLAGS="-L${ANDROID_3RD_LIBS_PATH}/lib"
+	export PKG_CONFIG_LIBDIR=${ANDROID_3RD_LIBS_PATH}/lib/pkgconfig
 		
 	echo "To build for Android x86..."
 	echo "From ScummVM source folder you may run *one* of the following configure commands or your own custom configure:"
