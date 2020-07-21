@@ -93,7 +93,7 @@ RUN sed 's/^deb \(.*\)/deb-src \1/' /etc/apt/sources.list \
 	libncurses5 \
 	pkg-config
 
-ENV VANILLA_PATH=$PATH
+ENV VANILLA_PATH=${PATH}
 
 #      
 # Note: We are building for:
@@ -159,7 +159,7 @@ ENV ANDROID_NDK_COMPILER=armv7a-linux-androideabi${PLATFORM_MIN_API_VERSION}
 ENV ANDROID_NDK_PLATFORM=android-${PLATFORM_MIN_API_VERSION}
 ENV ANDROID_LIBRARIES=${ANDROID_USR_OPT_PATH}/libraries/armv7a
 ENV ANDROID_TARGET_NDK_TOOLCHPREFIX=arm-linux-androideabi
-ENV PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/$ANDROID_TARGET_NDK_TOOLCHPREFIX-4.9/prebuilt/linux-x86_64/bin:$VANILLA_PATH
+ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:${VANILLA_PATH}
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
@@ -189,7 +189,7 @@ ENV ANDROID_NDK_COMPILER=aarch64-linux-android${PLATFORM_MIN_API_x64_VERSION}
 ENV ANDROID_NDK_PLATFORM=android-${PLATFORM_MIN_API_x64_VERSION}
 ENV ANDROID_LIBRARIES=${ANDROID_USR_OPT_PATH}/libraries/aarch64
 ENV ANDROID_TARGET_NDK_TOOLCHPREFIX=aarch64-linux-android
-ENV PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/$ANDROID_TARGET_NDK_TOOLCHPREFIX-4.9/prebuilt/linux-x86_64/bin:$VANILLA_PATH
+ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:${VANILLA_PATH}
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
@@ -219,7 +219,7 @@ ENV ANDROID_NDK_COMPILER=i686-linux-android${PLATFORM_MIN_API_VERSION}
 ENV ANDROID_NDK_PLATFORM=android-${PLATFORM_MIN_API_VERSION}
 ENV ANDROID_LIBRARIES=${ANDROID_USR_OPT_PATH}/libraries/i686
 ENV ANDROID_TARGET_NDK_TOOLCHPREFIX=x86
-ENV PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/$ANDROID_TARGET_NDK_TOOLCHPREFIX-4.9/prebuilt/linux-x86_64/bin:$VANILLA_PATH
+ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:${VANILLA_PATH}
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
@@ -249,7 +249,7 @@ ENV ANDROID_NDK_COMPILER=x86_64-linux-android${PLATFORM_MIN_API_x64_VERSION}
 ENV ANDROID_NDK_PLATFORM=android-${PLATFORM_MIN_API_x64_VERSION}
 ENV ANDROID_LIBRARIES=${ANDROID_USR_OPT_PATH}/libraries/x86_64
 ENV ANDROID_TARGET_NDK_TOOLCHPREFIX=x86_64
-ENV PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/$ANDROID_TARGET_NDK_TOOLCHPREFIX-4.9/prebuilt/linux-x86_64/bin:$VANILLA_PATH
+ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID_NDK_ROOT}/toolchains/${ANDROID_TARGET_NDK_TOOLCHPREFIX}-4.9/prebuilt/linux-x86_64/bin:${VANILLA_PATH}
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
@@ -272,7 +272,7 @@ RUN  ./compile-libraries.sh libsdl2-net
 RUN  ./compile-libraries.sh libfribidi
 
 RUN  ./cleanup-all-libraries-src-android.sh
-ENV PATH=$VANILLA_PATH
+ENV PATH=${VANILLA_PATH}
 #
 # --------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------
