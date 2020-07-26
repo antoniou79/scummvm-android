@@ -126,6 +126,7 @@ WORKDIR /tmp/compile
 COPY ./scripts/thirdPartyLibraries/compile-libraries.sh \
      ./scripts/thirdPartyLibraries/cleanup-all-libraries-src-android.sh \
      ./scripts/thirdPartyLibraries/patches/configure-freetype.patch \
+     ./scripts/thirdPartyLibraries/patches/configure-tremor.patch \
      ./scripts/thirdPartyLibraries/patches/patch-x86-vorbis-clang.patch \
      ./scripts/thirdPartyLibraries/patches/patch-mpeg2dec-confac.patch \
      ./scripts/thirdPartyLibraries/patches/forSDL2NetFiles.patch \
@@ -138,8 +139,9 @@ COPY ./scripts/thirdPartyLibraries/library-rules/libjpeg-turbo.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/faad2.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/libmad.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/libogg.sh library-rules/
-COPY ./scripts/thirdPartyLibraries/library-rules/libtheora.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/libvorbis.sh library-rules/
+COPY ./scripts/thirdPartyLibraries/library-rules/libtremor.sh library-rules/
+COPY ./scripts/thirdPartyLibraries/library-rules/libtheora.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/flac.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/mpeg2dec.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/openssl.sh library-rules/
@@ -170,8 +172,9 @@ RUN  ./compile-libraries.sh libjpeg-turbo
 RUN  ./compile-libraries.sh faad2
 RUN  ./compile-libraries.sh libmad
 RUN  ./compile-libraries.sh libogg
-RUN  ./compile-libraries.sh libtheora
+RUN  ./compile-libraries.sh libtremor
 RUN  ./compile-libraries.sh libvorbis
+RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh flac
 RUN  ./compile-libraries.sh mpeg2dec
 RUN  ./compile-libraries.sh openssl
@@ -200,8 +203,9 @@ RUN  ./compile-libraries.sh libjpeg-turbo
 RUN  ./compile-libraries.sh faad2
 RUN  ./compile-libraries.sh libmad
 RUN  ./compile-libraries.sh libogg
-RUN  ./compile-libraries.sh libtheora
+RUN  ./compile-libraries.sh libtremor
 RUN  ./compile-libraries.sh libvorbis
+RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh flac
 RUN  ./compile-libraries.sh mpeg2dec
 RUN  ./compile-libraries.sh openssl
@@ -230,8 +234,8 @@ RUN  ./compile-libraries.sh libjpeg-turbo
 RUN  ./compile-libraries.sh faad2
 RUN  ./compile-libraries.sh libmad
 RUN  ./compile-libraries.sh libogg
-RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh libvorbis
+RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh flac
 RUN  ./compile-libraries.sh mpeg2dec
 RUN  ./compile-libraries.sh openssl
@@ -260,8 +264,8 @@ RUN  ./compile-libraries.sh libjpeg-turbo
 RUN  ./compile-libraries.sh faad2
 RUN  ./compile-libraries.sh libmad
 RUN  ./compile-libraries.sh libogg
-RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh libvorbis
+RUN  ./compile-libraries.sh libtheora
 RUN  ./compile-libraries.sh flac
 RUN  ./compile-libraries.sh mpeg2dec
 RUN  ./compile-libraries.sh openssl

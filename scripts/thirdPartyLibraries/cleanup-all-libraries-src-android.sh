@@ -25,4 +25,5 @@ rm -rf ./fluidsynth-lite*
 rm -rf ./a52dec*
 rm -rf ./nasm*
 rm -rf ./fribidi*
+rm -rf ./tremor*
 
