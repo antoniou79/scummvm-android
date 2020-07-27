@@ -8,11 +8,12 @@ else
     cd tremor || exit 128
 fi
 
-if [ $host == "arm-linux-androideabi" ]; then
-	OPTIONS="--enable-low-accuracy"
-fi
+$OPTIONS=""
+#if [ $host == "arm-linux-androideabi" ]; then
+#	OPTIONS="--enable-low-accuracy"
+#fi
 
-#patch is needed for arm64 (aarch64 to be treated as arm arch)
+#patch is needed for arm64 (aarch64 to be treated as Little Endian arm arch)
 if [ $host == "aarch64-linux-android" ]; then
 	patch -p1 < ../configure-tremor.patch
 fi
