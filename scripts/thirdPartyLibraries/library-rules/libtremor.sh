@@ -8,7 +8,7 @@ else
     cd tremor || exit 128
 fi
 
-$OPTIONS=""
+#OPTIONS=""
 #if [ $host == "arm-linux-androideabi" ]; then
 #	OPTIONS="--enable-low-accuracy"
 #fi
@@ -20,7 +20,8 @@ fi
 
 autoreconf -fi
 
-do_configure $OPTIONS
+#do_configure $OPTIONS
+do_configure
 make
 make install-data-am
 make install-exec-am
