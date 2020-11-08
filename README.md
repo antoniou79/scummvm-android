@@ -19,7 +19,7 @@ Cross-compiled libraries are:
 -  zlib : Android NDK comes with a suitable zlib already
 -  libiconv-1.16                                            -- http://ftp.gnu.org/gnu/libiconv/libiconv-1.16.tar.gz
 -  libpng-1.6.37                                            -- https://github.com/glennrp/libpng/archive/v1.6.37.tar.gz
--  freetype-2.10.2                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.2.tar.gz
+-  freetype-2.10.4                                          -- https://download.savannah.gnu.org/releases/freetype/freetype-2.10.4.tar.gz
 -  libjpeg-turbo-2.0.5                                      -- https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.5.tar.gz
 -  faad2-2.9.2                                              -- https://github.com/knik0/faad2/archive/2_9_2.tar.gz
 -  libmad_0.15.1b                                           -- Debian 10.1 Distribution package (0.15.1b ? is latest (but old))
