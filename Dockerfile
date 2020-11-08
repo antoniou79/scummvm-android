@@ -132,6 +132,7 @@ COPY ./scripts/thirdPartyLibraries/compile-libraries.sh \
      ./scripts/thirdPartyLibraries/patches/forSDL2NetFiles.patch \
      ./
 
+COPY ./scripts/thirdPartyLibraries/create-android-ndk-zlib-pc.sh ./
 COPY ./scripts/thirdPartyLibraries/library-rules/libiconv.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/libpng1.6.sh library-rules/
 COPY ./scripts/thirdPartyLibraries/library-rules/freetype.sh library-rules/
@@ -165,6 +166,7 @@ ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
+RUN  ./create-android-ndk-zlib-pc.sh ${PLATFORM_MIN_API_VERSION}
 RUN  ./compile-libraries.sh libiconv
 RUN  ./compile-libraries.sh libpng1.6
 RUN  ./compile-libraries.sh freetype
@@ -196,6 +198,7 @@ ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
+RUN  ./create-android-ndk-zlib-pc.sh ${PLATFORM_MIN_API_x64_VERSION}
 RUN  ./compile-libraries.sh libiconv
 RUN  ./compile-libraries.sh libpng1.6
 RUN  ./compile-libraries.sh freetype
@@ -227,6 +230,7 @@ ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
+RUN  ./create-android-ndk-zlib-pc.sh ${PLATFORM_MIN_API_VERSION}
 RUN  ./compile-libraries.sh libiconv
 RUN  ./compile-libraries.sh libpng1.6
 RUN  ./compile-libraries.sh freetype
@@ -257,6 +261,7 @@ ENV PATH=${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/linux-x86_64/bin:${ANDROID
 
 RUN  ./cleanup-all-libraries-src-android.sh
 
+RUN  ./create-android-ndk-zlib-pc.sh ${PLATFORM_MIN_API_x64_VERSION}
 RUN  ./compile-libraries.sh libiconv
 RUN  ./compile-libraries.sh libpng1.6
 RUN  ./compile-libraries.sh freetype

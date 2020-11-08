@@ -33,3 +33,33 @@
  
    test -z "${CC_BUILD}" && as_fn_error $? "cannot find native C compiler" "$LINENO" 5
  
+--- a/include/freetype/config/ftoption.h
++++ b/include/freetype/config/ftoption.h
+@@ -124,7 +124,7 @@
+    * When this macro is not defined, FreeType offers alternative LCD
+    * rendering technology that produces excellent output.
+    */
+-/* #define FT_CONFIG_OPTION_SUBPIXEL_RENDERING */
++#define FT_CONFIG_OPTION_SUBPIXEL_RENDERING
+ 
+ 
+   /**************************************************************************
+@@ -221,7 +221,7 @@
+    *   options set by those programs have precedence, overwriting the value
+    *   here with the configured one.
+    */
+-/* #define FT_CONFIG_OPTION_SYSTEM_ZLIB */
++#define FT_CONFIG_OPTION_SYSTEM_ZLIB
+ 
+ 
+   /**************************************************************************
+@@ -270,7 +270,7 @@
+    *   options set by those programs have precedence, overwriting the value
+    *   here with the configured one.
+    */
+-/* #define FT_CONFIG_OPTION_USE_PNG */
++#define FT_CONFIG_OPTION_USE_PNG
+ 
+ 
+   /**************************************************************************
+

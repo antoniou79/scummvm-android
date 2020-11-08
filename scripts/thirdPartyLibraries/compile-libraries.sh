@@ -31,6 +31,8 @@ set_toolchain () {
 	export ACLOCAL_PATH=$ANDROID_LIBRARIES/share/aclocal
 	export PKG_CONFIG_LIBDIR=$ANDROID_LIBRARIES/lib
 	export PKG_CONFIG_PATH=$ANDROID_LIBRARIES/lib/pkgconfig
+
+	export SYSROOT=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/sysroot
 }
 
 # get_dependencies() method is used in library_rules scripts!
@@ -94,6 +96,7 @@ trap fatal_error ERR
 libraries=$@
 
 set_toolchain
+env
 echo $PATH
 for library in $libraries; do
 	echo "Building $library"
